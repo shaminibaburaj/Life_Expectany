@@ -35,12 +35,8 @@ yearIndex;
    this.year=year;
    this.values=values;
  };
- function Second(countryName,countrycode,indicatorname,indicatorcode,year,values)
+ function Second(year,values)
 {
- this.countryName =countryName;
- this.countrycode=countrycode;
- this.indicatorname=indicatorname;
- this.indicatorcode=indicatorcode;
  this.year=year;
  this.values=values;
 };
@@ -84,20 +80,10 @@ for(var i=0;i<Asian_Countries.length;i++)
  {
    if((content1[yearIndex]<=2015)&&(content1[yearIndex]>=1960)&&(content1[IndicatorNameIndex]==='Life expectancy at birth, male (years)')||(content1[IndicatorNameIndex]==='Life expectancy at birth, female (years)'))
    {
-     //var value1 = new Second(content1[countryIndex],content1[countrycode],content1[IndicatorNameIndex],content1[indicatorcode],content1[yearIndex],content1[valueIndex]);
+     var value1 = new Second(content1[yearIndex],content1[valueIndex]);
 
-     for(var j=0;j<headers.length;j++)
-            {
-              if(j<4)
-              {
-              j=4;
-              }
-
-            obj[headers[j]]=content1[j];
-          }
-          //console.log(obj);
-             arr.push(obj);
-             //console.log(arr);
+             arr.push(value1);
+            //console.log(arr);
   }
    else
     {
@@ -124,25 +110,27 @@ for(var i=0;i<Asian_Countries.length;i++)
   for (var i = 0; i < arr.length; i++) {
     if(i%2==0)
     {
-      female=arr[i].Value;
+      female=arr[i].values;
 
 
     }
     else {
 
-      male=arr[i].Value;
+      male=arr[i].values;
 
     }
+
     if((i+1)%2===0)
     {
 
 		//console.log(female);
 		//console.log(i);
 		//console.log(male);
-      arr1.push({"Year":arr[i].Year,"Female":female,"Male":male});
-    }
+      arr1.push({"Year":arr[i].year,"Female":female,"Male":male});
 
-  }
+    //console.log(arr1);
+    }
+}
   outstream.write(JSON.stringify(arr1));
 for(var p=0;p<Asian_Countries.length;p++)
 {
